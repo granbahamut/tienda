@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tienda150</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      TIENDA SUPER FANTASTICA 2018 - PREMIUM!!!
+    </header>
+    <main>
+      <div id="login">
+        <p class="navbar-text pull-right">
+          <% if user_signed_in? %>
+            Logged in as <strong><%= current_user.email %></strong>.
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+            <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+          <% end %>
+        </p>
+      </div>
+      <aside>
+        <ul id="menuPrincipal">
+          <li><%= link_to '<button type="button" id="menuButton" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Home</button>'.html_safe, root_path %></li>
+          <li><%= link_to '<button type="button" id="menuButton" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Products</button>'.html_safe, products_path %></li>
+          <li>
+            <ul id="menuSecundario">
+              <li><button type="button" id="menuButton" class="btn btn-secondary">P1</button></li>
+              <li><button type="button" id="menuButton" class="btn btn-secondary">P2</button></li>
+              <li><button type="button" id="menuButton" class="btn btn-secondary">Pn...</button></li>
+            </ul>
+          </li>
+          <li><%= link_to '<button type="button" id="menuButton" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Categories</button>'.html_safe, categories_path %></li>
+          <li>
+            <ul id="menuSecundario">
+              <li><button type="button" id="menuButton" class="btn btn-secondary">C1</button></li>
+              <li><button type="button" id="menuButton" class="btn btn-secondary">C2</button></li>
+              <li><button type="button" id="menuButton" class="btn btn-secondary">Cn...</button></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+      <div id="contenido">
+        <%= yield %>
+      </div>
+    </main>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <footer>
+      Tienda Super Fantástica - 2018 Todos los derechos reservados.
+    </footer>
+  </body>
+</html>
